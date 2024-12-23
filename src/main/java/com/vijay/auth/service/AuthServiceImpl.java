@@ -75,24 +75,37 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public String register(RegistraonRequest req) {
 
-		// add check for username exists in database
+		// Add check for username exists in database
 		if (userRepository.existsByUsername(req.getUsername())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
+			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Username already exists.");
 		}
 
-		// add check for email exists in database
+		// Add check for email exists in database
 		if (userRepository.existsByEmail(req.getEmail())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
+			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email already exists.");
 		}
 
-		//User user = new User();
-	    User user = mapper.map(req, User.class);
+		// Map the request to a new User object
+		User user = mapper.map(req, User.class);
+
+		// Set the password after encoding
 		user.setPassword(passwordEncoder.encode(req.getPassword()));
-		Role userRole = roleRepository.findByName("ROLE_NORMAL").get();
+
+		// Fetch the user role from the repository
+		Role userRole = roleRepository.findByName("ROLE_NORMAL").orElseThrow(() -> new BlogAPIException(HttpStatus.INTERNAL_SERVER_ERROR, "Default role not found."));
+
+		// Initialize the roles field if it's null
+		if (user.getRoles() == null) {
+			user.setRoles(new HashSet<>());
+		}
+
+		// Add the user role to the roles set
 		user.getRoles().add(userRole);
+
+		// Save the user to the database
 		userRepository.save(user);
 
-		return "User registered successfully!.";
+		return "User registered successfully.";
 	}
 
 	@Override
@@ -112,8 +125,19 @@ public class AuthServiceImpl implements AuthService {
 
 		Worker worker = mapper.map(req, Worker.class);
 		worker.setPassword(passwordEncoder.encode(req.getPassword()));
-		Role userRole = roleRepository.findByName("ROLE_WORKER").get();
-		worker.getRoles().add(userRole);
+
+		// Fetch the worker role from the repository
+		Role workerRole = roleRepository.findByName("ROLE_WORKER")
+				.orElseThrow(() -> new BlogAPIException(HttpStatus.INTERNAL_SERVER_ERROR, "Worker role not found."));
+
+		// Initialize the roles field if it's null
+		if (worker.getRoles() == null) {
+			worker.setRoles(new HashSet<>());
+		}
+
+		// Add the worker role to the roles set
+		worker.getRoles().add(workerRole);
+
 		worker.setUser(user);
 		workerRepository.save(worker);
 

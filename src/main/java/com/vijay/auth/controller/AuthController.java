@@ -54,7 +54,7 @@ public class AuthController {
 	        String response = authService.register(request);
 	        return new ResponseEntity<>(response, HttpStatus.CREATED);
 	    }
-	    @PostMapping("/worker")
+	    @PostMapping(value ={"/worker"})
 	    public ResponseEntity<RegistraonResponse> registerWorker(@RequestBody RegistraonRequest registerDto){
 	        RegistraonResponse registerWorker = authService.registerWorker(registerDto);
 	        return new ResponseEntity<>(registerWorker, HttpStatus.CREATED);
