@@ -1,6 +1,6 @@
-package com.vijay.auth.response;
+package com.vijay.auth.entity.response;
 
-import com.vijay.auth.model.UserDto;
+import com.vijay.auth.entity.model.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

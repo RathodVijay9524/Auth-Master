@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.vijay.auth.exception.model.BadApiRequestException;
+import com.vijay.auth.exception.model.BlogAPIException;
+import com.vijay.auth.exception.model.ErrorDetails;
+import com.vijay.auth.exception.model.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.vijay.auth.response.ApiResponseMessage;
+import com.vijay.auth.entity.response.ApiResponseMessage;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -25,7 +28,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ErrorDetails> handleResourceNotFoundExc(ResourceNotFoundException exc,
-			WebRequest webRequest) {
+																  WebRequest webRequest) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exc.getMessage(), webRequest.getDescription(false));
 		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
 	}

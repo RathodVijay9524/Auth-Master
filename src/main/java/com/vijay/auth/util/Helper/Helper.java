@@ -1,4 +1,4 @@
-package com.vijay.auth.helper;
+package com.vijay.auth.util.Helper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.vijay.auth.response.PageableResponse;
+import com.vijay.auth.entity.response.PageableResponse;
 
 import jakarta.mail.internet.MimeMessage;
 

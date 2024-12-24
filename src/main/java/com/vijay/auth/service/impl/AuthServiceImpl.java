@@ -1,5 +1,8 @@
-package com.vijay.auth.service;
+package com.vijay.auth.service.impl;
 
+import com.vijay.auth.service.AuthService;
+import com.vijay.auth.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,22 +18,21 @@ import org.springframework.stereotype.Service;
 import com.vijay.auth.entity.Role;
 import com.vijay.auth.entity.User;
 import com.vijay.auth.entity.Worker;
-import com.vijay.auth.exception.BlogAPIException;
-import com.vijay.auth.model.UserDto;
+import com.vijay.auth.exception.model.BlogAPIException;
+import com.vijay.auth.entity.model.UserDto;
 import com.vijay.auth.repository.RoleRepo;
 import com.vijay.auth.repository.UserRepository;
 import com.vijay.auth.repository.WorkerRepository;
-import com.vijay.auth.request.LoginRequest;
-import com.vijay.auth.request.RegistraonRequest;
-import com.vijay.auth.response.LoginJWTResponse;
-import com.vijay.auth.response.RegistraonResponse;
-import com.vijay.auth.security.JwtTokenProvider;
+import com.vijay.auth.entity.request.LoginRequest;
+import com.vijay.auth.entity.request.RegistraonRequest;
+import com.vijay.auth.entity.response.LoginJWTResponse;
+import com.vijay.auth.entity.response.RegistraonResponse;
+import com.vijay.auth.config.security.JwtTokenProvider;
 
 import java.util.HashSet;
 
-import java.util.Set;
-
 @Service
+@Log4j2
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired
@@ -75,14 +77,10 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public String register(RegistraonRequest req) {
 
-		// Add check for username exists in database
-		if (userRepository.existsByUsername(req.getUsername())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Username already exists.");
-		}
-
-		// Add check for email exists in database
-		if (userRepository.existsByEmail(req.getEmail())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email already exists.");
+		// add check for username exists in database
+		if (userService.existsByUsernameOrEmail(req.getUsername()) || userService.existsByUsernameOrEmail(req.getEmail())) {
+			log.error("Username '{}' or email '{}' already exists", req.getUsername(), req.getEmail());
+			throw new RuntimeException("Username or email is already taken");
 		}
 
 		// Map the request to a new User object
@@ -111,13 +109,9 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public RegistraonResponse registerWorker(RegistraonRequest req) {
 		// add check for username exists in database
-		if (userRepository.existsByUsername(req.getUsername())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
-		}
-
-		// add check for email exists in database
-		if (userRepository.existsByEmail(req.getEmail())) {
-			throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
+		if (userService.existsByUsernameOrEmail(req.getUsername()) || userService.existsByUsernameOrEmail(req.getEmail())) {
+			log.error("Username '{}' or email '{}' already exists", req.getUsername(), req.getEmail());
+			throw new RuntimeException("Username or email is already taken");
 		}
 
 		UserDto currentUser = userService.getCurrentUser();

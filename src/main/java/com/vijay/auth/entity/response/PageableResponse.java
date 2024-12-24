@@ -1,4 +1,4 @@
-package com.vijay.auth.response;
+package com.vijay.auth.entity.response;
 
 import java.util.List;
 
