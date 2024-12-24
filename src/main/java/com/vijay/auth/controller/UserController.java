@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vijay.auth.model.UserDto;
-import com.vijay.auth.response.ApiResponseMessage;
-import com.vijay.auth.response.PageableResponse;
+import com.vijay.auth.entity.model.UserDto;
+import com.vijay.auth.entity.response.ApiResponseMessage;
+import com.vijay.auth.entity.response.PageableResponse;
 import com.vijay.auth.service.UserService;
 
 import jakarta.validation.Valid;

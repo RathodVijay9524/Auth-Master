@@ -1,4 +1,4 @@
-package com.vijay.auth.security;
+package com.vijay.auth.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

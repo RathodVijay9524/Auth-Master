@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vijay.auth.model.UserDto;
-import com.vijay.auth.request.LoginRequest;
-import com.vijay.auth.request.RegistraonRequest;
-import com.vijay.auth.response.LoginJWTResponse;
-import com.vijay.auth.response.RegistraonResponse;
+import com.vijay.auth.entity.model.UserDto;
+import com.vijay.auth.entity.request.LoginRequest;
+import com.vijay.auth.entity.request.RegistraonRequest;
+import com.vijay.auth.entity.response.LoginJWTResponse;
+import com.vijay.auth.entity.response.RegistraonResponse;
 import com.vijay.auth.service.AuthService;
 import com.vijay.auth.service.UserService;
 

@@ -1,11 +1,10 @@
-package com.vijay.auth.helper;
+package com.vijay.auth.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.vijay.auth.service.FileService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vijay.auth.exception.BadApiRequestException;
+import com.vijay.auth.exception.model.BadApiRequestException;
 
 import io.jsonwebtoken.io.IOException;
 import lombok.extern.log4j.Log4j2;
@@ -17,7 +16,7 @@ import java.util.UUID;
 
 @Service
 @Log4j2
-public class FileServiceImpl implements FileService   {
+public class FileServiceImpl implements FileService {
 
 	@Override
 	public String uploadFile(MultipartFile file, String path) throws IOException {

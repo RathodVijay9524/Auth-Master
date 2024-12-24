@@ -1,9 +1,8 @@
-package com.vijay.auth.response;
+package com.vijay.auth.entity.model;
 
 import java.util.Set;
 
 import com.vijay.auth.entity.Role;
-import com.vijay.auth.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,10 +15,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegistraonResponse {
+public class UserDto {
 	
     private Long id;
-    
     private String name;
     
     private String username;
@@ -30,5 +28,5 @@ public class RegistraonResponse {
 
     private Set<Role> roles;
     
-    private User user;
+    //private User user;
 }

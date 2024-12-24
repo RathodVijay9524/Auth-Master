@@ -1,9 +1,9 @@
 package com.vijay.auth.service;
 
-import com.vijay.auth.request.LoginRequest;
-import com.vijay.auth.request.RegistraonRequest;
-import com.vijay.auth.response.LoginJWTResponse;
-import com.vijay.auth.response.RegistraonResponse;
+import com.vijay.auth.entity.request.LoginRequest;
+import com.vijay.auth.entity.request.RegistraonRequest;
+import com.vijay.auth.entity.response.LoginJWTResponse;
+import com.vijay.auth.entity.response.RegistraonResponse;
 
 public interface AuthService {
 	LoginJWTResponse login(LoginRequest req);

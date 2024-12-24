@@ -1,4 +1,4 @@
-package com.vijay.auth.helper;
+package com.vijay.auth.service;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.vijay.auth.exception;
+package com.vijay.auth.exception.model;
 
 import org.springframework.http.HttpStatus;
 

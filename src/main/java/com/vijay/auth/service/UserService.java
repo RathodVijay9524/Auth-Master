@@ -2,11 +2,12 @@ package com.vijay.auth.service;
 
 import java.util.List;
 
-import com.vijay.auth.model.UserDto;
-import com.vijay.auth.response.PageableResponse;
+import com.vijay.auth.entity.model.UserDto;
+import com.vijay.auth.entity.response.PageableResponse;
 
 public interface UserService {
 
+	boolean existsByUsernameOrEmail(String usernameOrEmail);
 	UserDto getCurrentUser();
 
 	PageableResponse<UserDto> getAllUsers(int pageNumber, int pageSize, String sortBy, String sortDir);

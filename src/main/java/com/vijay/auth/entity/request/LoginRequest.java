@@ -1,4 +1,4 @@
-package com.vijay.auth.request;
+package com.vijay.auth.entity.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

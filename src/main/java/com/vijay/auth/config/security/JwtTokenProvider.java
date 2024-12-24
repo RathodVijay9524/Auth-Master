@@ -1,4 +1,4 @@
-package com.vijay.auth.security;
+package com.vijay.auth.config.security;
 
 
 import io.jsonwebtoken.*;
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.vijay.auth.exception.BlogAPIException;
+import com.vijay.auth.exception.model.BlogAPIException;
 
 import java.security.Key;
 import java.util.Date;
